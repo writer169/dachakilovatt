@@ -29,7 +29,16 @@ export async function createSession(appId: string): Promise<string> {
 export async function verifySession(token: string): Promise<Session | null> {
   try {
     const { payload } = await jwtVerify(token, JWT_SECRET);
-    return payload as Session;
+    
+    // Проверяем наличие необходимых полей
+    if (typeof payload.appId === 'string' && typeof payload.iat === 'number') {
+      return {
+        appId: payload.appId,
+        iat: payload.iat
+      };
+    }
+    
+    return null;
   } catch {
     return null;
   }
