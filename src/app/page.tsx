@@ -1,6 +1,7 @@
 import { getSession } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import LogoutButton from './LogoutButton';
+import RefreshButton from './RefreshButton';
 
 export default async function HomePage() {
   const session = await getSession();
@@ -35,12 +36,7 @@ export default async function HomePage() {
 
           <div className="space-y-4">
             <LogoutButton />
-            <button
-              onClick={() => window.location.reload()}
-              className="w-full px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
-            >
-              Refresh Page
-            </button>
+            <RefreshButton />
           </div>
         </div>
       </div>
